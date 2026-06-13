@@ -13,6 +13,12 @@ Teamily AI is a personal and social AI agent OS: an IM-style workspace where
 users chat with friends, groups, and AI agents; discover and remix
 community-created content; and manage agents, credits, and subscriptions.
 
+> **Link convention:** every relative path in this guide (e.g. `/chat`,
+> `/settings/language`) is relative to the `https://teamily.ai` domain. When
+> you are asked for a full/shareable link to a page, you MUST return the
+> absolute URL by prefixing the path with `https://teamily.ai` — for example,
+> `/settings/language` → `https://teamily.ai/settings/language`.
+
 This manual is generated from the per-route `llm.md` (page) and
 `layout.llm.md` (shared layout) files in `apps/chat-to/app`. Each page entry
 lists:
@@ -27,8 +33,8 @@ Regenerate with `pnpm gen:skill` (or `node generate-skill-md.mjs`) after editing
 
 - `/` is the landing page and dashboard shell. Its global navigation (header, sidebar, tab bar) reaches: [`/about`](#page-about), [`/about/help-center`](#page-abouthelp-center), [`/about/privacy-policy`](#page-aboutprivacy-policy), [`/about/refund-policy`](#page-aboutrefund-policy), [`/about/terms-of-service`](#page-aboutterms-of-service), [`/chat`](#page-chat), [`/contact`](#page-contact), [`/discover`](#page-discover), [`/download`](#page-download), [`/explore`](#page-explore), [`/login`](#page-login), [`/me`](#page-me), [`/pricing`](#page-pricing), [`/profile/[uid]`](#page-profileuid), [`/profile/edit`](#page-profileedit), [`/settings`](#page-settings), [`/settings/affiliate`](#page-settingsaffiliate), [`/settings/channels`](#page-settingschannels), [`/settings/connectors`](#page-settingsconnectors), [`/settings/creator-center`](#page-settingscreator-center), [`/settings/credits-center`](#page-settingscredits-center), [`/settings/language`](#page-settingslanguage), [`/settings/subscription`](#page-settingssubscription), [`/settings/usage`](#page-settingsusage).
 - Signed-out users are redirected to [`/login`](#page-login) by most product pages; after login they land back in the app.
-- **Deep-link entry pages** (no in-app upstream; reached via external/shared URLs): [`/add-contact`](#page-add-contact), [`/agent/[agent_name]`](#page-agentagent_name), [`/apply/invite-code`](#page-applyinvite-code), [`/auth/github`](#page-authgithub), [`/callback/auto-login`](#page-callbackauto-login), [`/callback/chat`](#page-callbackchat), [`/callback/stripe/cancel`](#page-callbackstripecancel), [`/callback/stripe/success`](#page-callbackstripesuccess), [`/checkout`](#page-checkout), [`/credits`](#page-credits), [`/dev/group-message-cases`](#page-devgroup-message-cases), [`/discover-legacy`](#page-discover-legacy), [`/embed/tool-view`](#page-embedtool-view), [`/get-started`](#page-get-started), [`/i/[invite_code]`](#page-iinvite_code), [`/invite/[imUid]`](#page-inviteimuid), [`/invite/friend/[imUid]`](#page-invitefriendimuid), [`/link/[code]`](#page-linkcode), [`/modal`](#page-modal), [`/playbook`](#page-playbook), [`/presentation`](#page-presentation), [`/profile/settings/connectors`](#page-profilesettingsconnectors), [`/region-restricted`](#page-region-restricted), [`/search`](#page-search), [`/settings/creator-studio`](#page-settingscreator-studio), [`/settings/credit-usage`](#page-settingscredit-usage), [`/settings/help`](#page-settingshelp), [`/settings/invite-history`](#page-settingsinvite-history), [`/settings/knowledge-base`](#page-settingsknowledge-base), [`/settings/security`](#page-settingssecurity), [`/settings/translation`](#page-settingstranslation), [`/share/[id]`](#page-shareid), [`/support`](#page-support), [`/test-native`](#page-test-native), [`/ui`](#page-ui), [`/ui/openclaw-test`](#page-uiopenclaw-test), [`/ui/video-test`](#page-uivideo-test), [`/ui/wip`](#page-uiwip), [`/web`](#page-web).
-- **Hub pages** (most outbound links): [`/settings`](#page-settings) (18), [`/`](#page-) (10), [`/discover`](#page-discover) (7), [`/i/[invite_code]`](#page-iinvite_code) (5), [`/post/[showcaseId]`](#page-postshowcaseid) (5), [`/pricing`](#page-pricing) (5).
+- **Deep-link entry pages** (no in-app upstream; reached via external/shared URLs): [`/add-contact`](#page-add-contact), [`/agent/[agent_name]`](#page-agentagent_name), [`/apply/invite-code`](#page-applyinvite-code), [`/checkout`](#page-checkout), [`/credits`](#page-credits), [`/dev/group-message-cases`](#page-devgroup-message-cases), [`/discover-legacy`](#page-discover-legacy), [`/embed/tool-view`](#page-embedtool-view), [`/get-started`](#page-get-started), [`/i/[invite_code]`](#page-iinvite_code), [`/invite/[imUid]`](#page-inviteimuid), [`/invite/friend/[imUid]`](#page-invitefriendimuid), [`/link/[code]`](#page-linkcode), [`/modal`](#page-modal), [`/playbook`](#page-playbook), [`/presentation`](#page-presentation), [`/profile/settings/connectors`](#page-profilesettingsconnectors), [`/region-restricted`](#page-region-restricted), [`/search`](#page-search), [`/settings/creator-studio`](#page-settingscreator-studio), [`/settings/credit-usage`](#page-settingscredit-usage), [`/settings/help`](#page-settingshelp), [`/settings/invite-history`](#page-settingsinvite-history), [`/settings/knowledge-base`](#page-settingsknowledge-base), [`/settings/security`](#page-settingssecurity), [`/settings/translation`](#page-settingstranslation), [`/share/[id]`](#page-shareid), [`/support`](#page-support), [`/web`](#page-web).
+- **Hub pages** (most outbound links): [`/settings`](#page-settings) (18), [`/`](#page-) (10), [`/chat`](#page-chat) (7), [`/discover`](#page-discover) (7), [`/i/[invite_code]`](#page-iinvite_code) (5), [`/post/[showcaseId]`](#page-postshowcaseid) (5).
 
 ## Feature areas
 
@@ -56,8 +62,6 @@ Sign-in, OAuth callbacks, invite-code redemption, and first-run onboarding. Most
 | Page | Name | What it does |
 | --- | --- | --- |
 | [`/apply/invite-code`](#page-applyinvite-code) | Apply Invite Code | Lets a user enter and verify an invite or promo code to claim a welcome credit, or skip to onboarding. |
-| [`/auth/github`](#page-authgithub) | GitHub OAuth Callback | Handles the GitHub OAuth callback by exchanging the code for a login session and redirecting on success or failure. |
-| [`/callback/auto-login`](#page-callbackauto-login) | Auto Login Callback | Redirect handler that completes passwordless login by verifying the email code from the URL, connecting the IM service, and redirecting the user back to their original destination. |
 | [`/get-started`](#page-get-started) | Get Started | Redirects users to the credits center onboarding tab. |
 | [`/i/[invite_code]`](#page-iinvite_code) | Invite Landing | An invite/referral landing page that validates an invite code, shows the inviter's profile and reward, and lets visitors connect or claim a welcome offer. |
 | [`/login`](#page-login) | Login | The login page where users authenticate to access Teamily AI, with support for a legacy web2 login variant. |
@@ -68,8 +72,7 @@ The core IM workspace: conversations with friends, groups, and AI agents, plus m
 
 | Page | Name | What it does |
 | --- | --- | --- |
-| [`/callback/chat`](#page-callbackchat) | Chat Callback | Post-login redirect handler that decodes the pending chat request, auto-subscribes the user to the selected agent, and forwards them to the chat page to start the conversation. |
-| [`/chat`](#page-chat) | Chat | The main chat workspace that opens conversations from URL params and renders the active conversation's chat content. |
+| [`/chat`](#page-chat) | Chat | The core IM chat workspace — opens conversations from URL params and renders the active conversation (messages, composer, header, side drawers). The home of message sending plus a deep tree of feature entries, dialogs, drawers, and per-message actions. |
 | [`/message-inbox`](#page-message-inbox) | Message Inbox | Displays the user's social notifications inbox. |
 | [`/modal`](#page-modal) | Modal Route | Empty placeholder route used by the modal context router to render dialogs without a 404. |
 | [`/search`](#page-search) | Global Search | Mobile-oriented global search screen with a query input and live search results. |
@@ -127,8 +130,6 @@ Plans, checkout flows, credit rewards, and payment callbacks.
 
 | Page | Name | What it does |
 | --- | --- | --- |
-| [`/callback/stripe/cancel`](#page-callbackstripecancel) | Stripe Cancel Callback | Stripe checkout cancellation redirect handler that releases the reserved payment session, shows a canceled dialog, and deep-links back to the desktop app when launched from there. |
-| [`/callback/stripe/success`](#page-callbackstripesuccess) | Stripe Success Callback | Stripe checkout success redirect handler that tracks the purchase conversion, refreshes the subscription, celebrates with confetti, and deep-links back to the desktop app when applicable. |
 | [`/checkout`](#page-checkout) | Checkout | A Paddle-powered checkout page showing an order summary and payment form for a selected price plan. |
 | [`/checkout/success`](#page-checkoutsuccess) | Checkout Success | A payment-success confirmation page that fires confetti, refetches the subscription, and links back to the dashboard or pricing. |
 | [`/credits`](#page-credits) | Credits | A redirect-only page that forwards users to the credits center settings tab. |
@@ -151,7 +152,7 @@ The settings hub and its subpages: profile, language, privacy, connectors, creat
 | [`/settings/help`](#page-settingshelp) | Help | Help settings page linking to the help center and opening a contact-us dialog with the support email. |
 | [`/settings/invite-history`](#page-settingsinvite-history) | Invite History | Redirects to the credits center invite tab to show the user's invitation history. |
 | [`/settings/knowledge-base`](#page-settingsknowledge-base) | Knowledge Base | Knowledge base management settings page, currently showing a coming-soon placeholder. |
-| [`/settings/language`](#page-settingslanguage) | Language | Language settings page that lets the user choose the interface language. |
+| [`/settings/language`](#page-settingslanguage) | Language | Language settings page with two independent knobs — the System (UI) language and the Chat auto-translation target language — plus an auto-translate toggle. The two pickers draw from different supported-language sets (see body). |
 | [`/settings/privacy`](#page-settingsprivacy) | Privacy | Privacy settings page where the user manages their privacy preferences. |
 | [`/settings/security`](#page-settingssecurity) | Security | Security settings page for managing account security, currently showing a coming-soon placeholder. |
 | [`/settings/subscription`](#page-settingssubscription) | Subscription | Subscription settings page where the user views and manages their plan. |
@@ -167,11 +168,6 @@ Internal playgrounds and embeds; not part of normal user flows.
 | --- | --- | --- |
 | [`/dev/group-message-cases`](#page-devgroup-message-cases) | Group Message Cases | A developer page for previewing group-message render and streaming card layouts across selectable mock cases. |
 | [`/embed/tool-view`](#page-embedtool-view) | Embedded Tool View | Renders a single agent tool-call view from a base64-encoded JSON payload passed via the data query parameter, intended for embedding. |
-| [`/test-native`](#page-test-native) | Native WebView Test | Developer test harness that embeds the native-webview iframe and posts messages to it for debugging. |
-| [`/ui`](#page-ui) | UI Design Reference | Internal design reference page showing the primary color palette (copyable) and wallet connection status. |
-| [`/ui/openclaw-test`](#page-uiopenclaw-test) | OpenClaw Test | Internal test page to deploy, list, inspect, and destroy OpenClaw instances and connect to them via terminal. |
-| [`/ui/video-test`](#page-uivideo-test) | Video Test | Internal test page for previewing videos and tracing their redirect chains, HTTP statuses, and video element lifecycle events. |
-| [`/ui/wip`](#page-uiwip) | WIP Playbooks | Internal work-in-progress workbench for previewing UI playbooks such as usage overview, model routing, VM warnings, uploads, and audio preview. |
 
 ## Page reference
 
@@ -184,7 +180,7 @@ their entries.
 
 **Home** — The Teamily AI landing/home page introducing the personal and social AI agent OS for productivity and creativity.
 
-- Upstream: [`/agent/[agent_name]`](#page-agentagent_name), [`/apply/invite-code`](#page-applyinvite-code), [`/auth/github`](#page-authgithub), [`/callback/auto-login`](#page-callbackauto-login), [`/callback/chat`](#page-callbackchat), [`/callback/stripe/cancel`](#page-callbackstripecancel), [`/callback/stripe/success`](#page-callbackstripesuccess), [`/checkout/success`](#page-checkoutsuccess), [`/i/[invite_code]`](#page-iinvite_code), [`/link/[code]`](#page-linkcode), [`/search`](#page-search), [`/settings`](#page-settings), [`/settings/withdraw`](#page-settingswithdraw), [`/share/[id]`](#page-shareid)
+- Upstream: [`/agent/[agent_name]`](#page-agentagent_name), [`/apply/invite-code`](#page-applyinvite-code), `/auth/github`, `/callback/auto-login`, `/callback/chat`, `/callback/stripe/cancel`, `/callback/stripe/success`, [`/checkout/success`](#page-checkoutsuccess), [`/i/[invite_code]`](#page-iinvite_code), [`/link/[code]`](#page-linkcode), [`/search`](#page-search), [`/settings`](#page-settings), [`/settings/withdraw`](#page-settingswithdraw), [`/share/[id]`](#page-shareid)
 - Downstream: [`/chat`](#page-chat), [`/discover`](#page-discover), [`/explore`](#page-explore), [`/login`](#page-login), [`/download`](#page-download), [`/pricing`](#page-pricing), [`/about`](#page-about), [`/about/help-center`](#page-abouthelp-center), [`/about/privacy-policy`](#page-aboutprivacy-policy), [`/about/terms-of-service`](#page-aboutterms-of-service)
 - CTAs:
   - **Header nav tabs** (`tabs`, click) — Top navigation; each click fires a landing analytics event.
@@ -295,23 +291,6 @@ their entries.
   - **Apply button** (`button`, click) — Verifies the entered invite code and claims the welcome credit, then redirects to credits center (logged in) or home.
   - **Skip button** (`button`, click) — Skips invite code entry, clears any pending code, and continues to onboarding tasks (logged in) or home.
 
-#### Page /auth/github
-
-**GitHub OAuth Callback** — Handles the GitHub OAuth callback by exchanging the code for a login session and redirecting on success or failure.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: [`/`](#page-), [`/login`](#page-login)
-- CTAs: _none_
-
-#### Page /callback/auto-login
-
-**Auto Login Callback** — Redirect handler that completes passwordless login by verifying the email code from the URL, connecting the IM service, and redirecting the user back to their original destination.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: [`/login`](#page-login), [`/`](#page-)
-- CTAs:
-  - **Go to Login** (`button`, click) — Shown when auto-login fails; navigates back to the /login page to sign in manually.
-
 #### Page /get-started
 
 **Get Started** — Redirects users to the credits center onboarding tab.
@@ -335,7 +314,7 @@ their entries.
 
 **Login** — The login page where users authenticate to access Teamily AI, with support for a legacy web2 login variant.
 
-- Upstream: [`/`](#page-), [`/agent/[agent_name]`](#page-agentagent_name), [`/auth/github`](#page-authgithub), [`/callback/auto-login`](#page-callbackauto-login), [`/checkout`](#page-checkout), [`/discover`](#page-discover), [`/discover-legacy`](#page-discover-legacy), [`/discover-legacy/[id]`](#page-discover-legacyid), [`/download`](#page-download), [`/explore`](#page-explore), [`/explore/[postId]`](#page-explorepostid), [`/i/[invite_code]`](#page-iinvite_code), [`/invite/[imUid]`](#page-inviteimuid), [`/invite/friend/[imUid]`](#page-invitefriendimuid), [`/invite/group/[groupId]`](#page-invitegroupgroupid), [`/playbook`](#page-playbook), [`/post/[showcaseId]`](#page-postshowcaseid), [`/pricing`](#page-pricing), [`/settings`](#page-settings)
+- Upstream: [`/`](#page-), [`/agent/[agent_name]`](#page-agentagent_name), `/auth/github`, `/callback/auto-login`, [`/checkout`](#page-checkout), [`/discover`](#page-discover), [`/discover-legacy`](#page-discover-legacy), [`/discover-legacy/[id]`](#page-discover-legacyid), [`/download`](#page-download), [`/explore`](#page-explore), [`/explore/[postId]`](#page-explorepostid), [`/i/[invite_code]`](#page-iinvite_code), [`/invite/[imUid]`](#page-inviteimuid), [`/invite/friend/[imUid]`](#page-invitefriendimuid), [`/invite/group/[groupId]`](#page-invitegroupgroupid), [`/playbook`](#page-playbook), [`/post/[showcaseId]`](#page-postshowcaseid), [`/pricing`](#page-pricing), [`/settings`](#page-settings)
 - Downstream: [`/about/terms-of-service`](#page-aboutterms-of-service), [`/about/privacy-policy`](#page-aboutprivacy-policy)
 - CTAs:
   - **Continue with Google** (`button`, click) — Google Identity Services button; on success the credential is exchanged for a session.
@@ -350,22 +329,99 @@ their entries.
 
 ### Chat & Messaging — details
 
-#### Page /callback/chat
-
-**Chat Callback** — Post-login redirect handler that decodes the pending chat request, auto-subscribes the user to the selected agent, and forwards them to the chat page to start the conversation.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: [`/`](#page-), [`/chat`](#page-chat)
-- CTAs: _none_
-
 #### Page /chat
 
-**Chat** — The main chat workspace that opens conversations from URL params and renders the active conversation's chat content.
+**Chat** — The core IM chat workspace — opens conversations from URL params and renders the active conversation (messages, composer, header, side drawers). The home of message sending plus a deep tree of feature entries, dialogs, drawers, and per-message actions.
 
-- Upstream: [`/`](#page-), [`/callback/chat`](#page-callbackchat), [`/discover`](#page-discover), [`/discover-legacy`](#page-discover-legacy), [`/discover-legacy/[id]`](#page-discover-legacyid), [`/explore`](#page-explore), [`/explore/[postId]`](#page-explorepostid), [`/i/[invite_code]`](#page-iinvite_code), [`/playbook`](#page-playbook), [`/post/[showcaseId]`](#page-postshowcaseid), [`/search`](#page-search), [`/search/conversation`](#page-searchconversation), [`/settings/creator-center`](#page-settingscreator-center), [`/settings/credits-center`](#page-settingscredits-center), [`/web`](#page-web)
-- Downstream: _none_
+- Upstream: [`/`](#page-), `/callback/chat`, [`/discover`](#page-discover), [`/discover-legacy`](#page-discover-legacy), [`/discover-legacy/[id]`](#page-discover-legacyid), [`/explore`](#page-explore), [`/explore/[postId]`](#page-explorepostid), [`/i/[invite_code]`](#page-iinvite_code), [`/playbook`](#page-playbook), [`/post/[showcaseId]`](#page-postshowcaseid), [`/search`](#page-search), [`/search/conversation`](#page-searchconversation), [`/settings/creator-center`](#page-settingscreator-center), [`/settings/credits-center`](#page-settingscredits-center), [`/web`](#page-web)
+- Downstream: [`/profile/[uid]`](#page-profileuid), [`/agent/[agent_name]`](#page-agentagent_name), [`/discover`](#page-discover), [`/pricing`](#page-pricing), [`/add-contact`](#page-add-contact), [`/settings/connectors`](#page-settingsconnectors), [`/search/conversation`](#page-searchconversation)
 - CTAs:
-  - **Send message** (`button`, click) — Sends the composed message (text/attachments) in the currently open conversation.
+  - **Message composer** (`nav`, click) — Bottom input bar for composing and sending messages; resizable on desktop via a bottom drag handle.
+    - **Message editor** (`input`, input/paste) — Rich-text (ProseMirror) field supporting text, links, newlines, and @mentions; Enter sends, Shift+Enter inserts a newline on desktop.
+    - **Send message** (`button`, click/input) — Sends the composed text/attachments; shown when the editor has content (Enter on desktop).
+    - **@mention popup** (`menu`, input) — Appears when typing @ in a group; pick a member to mention.
+      - **Mention everyone** (`button`, click) — @everyone — mentions all group members (first item).
+      - **Mention member** (`button`, click/hover) — Mentions a specific member (avatar + name); arrow keys navigate the list.
+    - **Emoji & sticker picker** (`menu`, click) — Smile-icon button opening the emoji/sticker picker (popover on desktop, drawer on mobile).
+      - **Insert emoji** (`button`, click) — Inserts the chosen emoji at the cursor.
+      - **Send sticker** (`button`, click) — Sends the chosen sticker as a message.
+    - **Attach file** (`button`, click) — Paperclip button that opens the OS file picker; selected files open the file confirm dialog before sending.
+    - **Media picker** (`menu`, click) — Camera-icon dropdown for image/video uploads.
+      - **Upload image** (`button`, click) — Opens the image picker; selection opens the files-preview dialog.
+      - **Upload video** (`button`, click) — Opens the video picker; selection opens the video confirm dialog.
+    - **Voice recorder** (`button`, click) — Mic button (shown when the editor is empty) that starts voice recording and swaps the input for recorder controls.
+      - **Cancel recording** (`button`, click) — Trash icon — stops and discards the recording.
+      - **Pause / resume recording** (`toggle`, click) — Pauses recording; toggles to resume.
+      - **Send voice** (`button`, click) — Finalizes and sends the voice message.
+    - **Quote / reply preview** (`button`, click) — Bar above the editor showing the message being replied to; an X clears the quote.
+    - **Attachment chips** (`button`, click) — Draft attachment thumbnails; each has an X to remove it before sending.
+    - **Files preview dialog** (`dialog`, click) — Batch preview for queued files before sending.
+      - **Add more files** (`button`, click) — Plus button to append more files to the batch.
+      - **Select / remove file** (`button`, click) — Tap a thumbnail to preview it; its X removes that file from the batch.
+      - **Send files** (`button`, click) — Sends all files in the batch.
+    - **Send-media confirm dialogs** (`dialog`, click) — Audio / video / file confirm dialogs shown before upload, each with Cancel and a Send button (with upload progress).
+  - **Conversation header** (`nav`, click) — Top bar of the open conversation: title, avatar, and the row of action entries.
+    - **Back to list** (`button`, click) — Mobile-only — returns to the conversation list.
+    - **Conversation title / avatar** (`button`, click) — Tapping the avatar or title opens the conversation info panel (user / agent / group info).
+    - **Tasks history** (`button`, click) — Gear icon (agents with tasks) opening the tasks/threads sheet; tapping a task opens the thread drawer.
+    - **Search in conversation** (`button`, click) — Opens the in-conversation search sheet (filter by message/media/file/voice; tap a result to jump to it).
+    - **More / settings (⋯)** (`button`, click) — Kebab menu that opens the conversation info panel.
+  - **Conversation info panel** (`dialog`, click) — Side sheet opened from the header (avatar / title / ⋯). Contents vary by conversation type (direct, agent, group).
+    - **View full profile** (`link`, click) — Opens the user's or agent's full profile page (non-agents → /profile, custom agents → agent page).
+    - **Mute notifications** (`toggle`, click) — Mutes/unmutes this conversation.
+    - **Pin to top** (`toggle`, click) — Pins/unpins the conversation in the list.
+    - **Conversation translation** (`toggle`, click) — Enables/disables automatic message translation for this conversation.
+    - **Create new group** (`button`, click) — Opens the create-group modal pre-seeded with this user/agent.
+    - **Set remark** (`button`, click) — Direct chats — opens a dialog to set a custom name for the contact.
+    - **Block / delete friend** (`button`, click) — Direct chats — block the user, or delete the friend (opens confirmation).
+    - **Clear chat history** (`button`, click) — Deletes all messages in the conversation (opens confirmation).
+    - **Agent skills** (`button`, click) — Agent chats — expandable skills/tools list; tap a skill or Add skill to open the edit-skills dialog.
+    - **Agent connectors** (`button`, click) — Agent chats — expandable connectors list with per-connector toggles and a Connect app entry (→ /settings/connectors).
+    - **Group: edit name** (`button`, click) — Group chats (owner/admin) — inline-edit the group name.
+    - **Group: copy / share invite** (`button`, click) — Copy the group link, or open the share-group dialog to invite via link/email.
+    - **Group: add agent / friend** (`button`, click) — Opens the invite-member dialog on the agent or human tab.
+    - **Group: payment mode** (`select`, click) — Owner-only radio choice of Owner Pays / Members Pay (opens confirmation).
+    - **Group: members** (`tabs`, click) — Agent/Human member tabs; tap a member to open their info, with owner/admin actions (set admin, transfer ownership, remove) each behind a confirmation.
+    - **Group: leave / dismiss** (`button`, click) — Leave the group (optionally delete the local chat) or, owner-only, dismiss the group — both with confirmation.
+  - **Message actions** (`menu`, hover/rightclick/longpress) — Per-message action menu (hover overlay on desktop, long-press sheet on mobile).
+    - **Reply** (`button`, click) — Quotes the message into the composer.
+    - **Copy** (`button`, click) — Copies message text (or image as PNG / media-text with attachments) to the clipboard.
+    - **Forward** (`button`, click) — Opens the forward dialog to send the message to another conversation.
+    - **Translate** (`button`, click) — Translates the message; opens a language-picker dialog to choose the target language.
+    - **Transcribe** (`button`, click) — Converts a voice message to a text transcript.
+    - **Save as sticker** (`button`, click) — Saves an image message to the sticker library.
+    - **Multi-select** (`button`, click) — Enters multi-select mode with this message selected, revealing the bulk action bar.
+    - **Recall** (`button`, click) — Revokes a sent message (own messages only).
+    - **Delete** (`button`, click) — Deletes the message (opens confirmation).
+    - **Report** (`button`, click) — Group messages — opens a report dialog with reasons: spam, violence, child abuse, pornography, copyright, illegal drugs, personal details.
+    - **React** (`menu`, click) — Emoji reaction strip (👍 ❤️ 😂 😮 😢 😡 👌) to add/toggle a reaction.
+  - **Message reactions** (`button`, click) — Reaction pills shown under a message; tap to open a popover of who reacted.
+    - **Reaction tabs** (`tabs`, click) — All / per-emoji tabs filtering the reactor list.
+    - **Remove own reaction** (`button`, click) — Removes your reaction from your entry in the list.
+  - **Quote jump** (`button`, click) — Tapping a quoted-message preview scrolls to and highlights the original message.
+  - **Multi-select action bar** (`nav`, click) — Bottom bar shown while messages are selected.
+    - **Forward step-by-step** (`button`, click) — Forwards the selected messages one at a time.
+    - **Merge forward** (`button`, click) — Forwards the selected messages as a single merged message.
+    - **Delete selected** (`button`, click) — Deletes all selected messages (opens confirmation).
+    - **Cancel selection** (`button`, click) — Exits multi-select mode.
+  - **Media & file viewers** (`dialog`, click) — Full-screen image/media lightbox opened by tapping an image, video, or media result.
+    - **Navigate media** (`button`, click) — Previous/next controls and a thumbnail strip to move through the conversation's media.
+    - **Zoom / rotate** (`button`, click/doubleclick/scroll) — Zoom in/out and rotate the image (double-click and scroll-wheel also zoom on desktop).
+    - **Download media** (`button`, click) — Saves the media file to the device.
+    - **Star / forward / reply (mobile)** (`button`, click) — Mobile image viewer actions to favorite, forward, or reply to the image.
+    - **Close viewer** (`button`, click) — Dismisses the media viewer.
+    - **Audio playback** (`button`, click/drag) — Voice-message play/pause, seek scrubber, and volume (native audio controls).
+  - **Side panels & drawers** (`nav`, click) — Right-side drawers and overlays opened from agent/group messages and long content.
+    - **Thread drawer** (`dialog`, click) — Opened by an agent task's 'View my thoughts'; shows the full thread/task with a close button (and a dev debug panel).
+    - **Iframe / tool drawer** (`dialog`, click) — Embeds an external tool / business-action page; closes via the header X (iframe is kept mounted for state).
+    - **Show-more sheet** (`dialog`, click) — Expands long markdown (fullscreen on mobile, bottom sheet/TOC on desktop) with copy and close controls.
+  - **Inline status banners** (`nav`, click) — Contextual notices that appear above the message list or composer.
+    - **Need-upgrade banner** (`button`, click) — Usage-limit banner with Upgrade (→ /pricing), Enable on-demand usage, Use credit, and Dismiss.
+    - **Subscription / token notices** (`button`, click) — Floating notices to refresh an expiring agent token, renew/manage an expired subscription, or repair a timed-out self-hosted agent; each dismissible.
+    - **Group onboarding card** (`button`, click) — Group intro card — expand for rules and tap a suggested prompt to prefill the composer; dismissible.
+  - **Floating jump buttons** (`button`, click) — Circular buttons on the message list's right edge.
+    - **Jump to @mentions** (`button`, click) — Scrolls to the first unread @mention; badge shows the count (when > 0).
+    - **Scroll to bottom** (`button`, click) — Scrolls to the latest message or first unread (shown when not at the bottom).
 
 #### Page /message-inbox
 
@@ -714,24 +770,6 @@ their entries.
 
 ### Billing, Credits & Subscription — details
 
-#### Page /callback/stripe/cancel
-
-**Stripe Cancel Callback** — Stripe checkout cancellation redirect handler that releases the reserved payment session, shows a canceled dialog, and deep-links back to the desktop app when launched from there.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: [`/`](#page-)
-- CTAs:
-  - **OK** (`button`, click) — Closes the payment-canceled dialog, refetches subscription state, and redirects to the home page.
-
-#### Page /callback/stripe/success
-
-**Stripe Success Callback** — Stripe checkout success redirect handler that tracks the purchase conversion, refreshes the subscription, celebrates with confetti, and deep-links back to the desktop app when applicable.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: [`/`](#page-)
-- CTAs:
-  - **OK** (`button`, click) — Closes the payment-succeeded dialog, refetches subscription state, and redirects to the home page.
-
 #### Page /checkout
 
 **Checkout** — A Paddle-powered checkout page showing an order summary and payment form for a selected price plan.
@@ -909,14 +947,74 @@ their entries.
 
 #### Page /settings/language
 
-**Language** — Language settings page that lets the user choose the interface language.
+**Language** — Language settings page with two independent knobs — the System (UI) language and the Chat auto-translation target language — plus an auto-translate toggle. The two pickers draw from different supported-language sets (see body).
 
 - Upstream: [`/`](#page-), [`/settings`](#page-settings)
 - Downstream: _none_
 - CTAs:
-  - **System Language** (`select`, click) — Selects the app UI locale, persisted via the locale context.
-  - **Chat Language** (`select`, click) — Selects the target language for chat message auto-translation, saved to the translation service.
-  - **Auto Translate** (`toggle`, click) — Enables or disables automatic translation of incoming chat messages.
+  - **System Language** (`select`, click) — Selects the app UI locale (persisted via the locale context). 17 supported locales — see the body for the full list.
+  - **Chat Language** (`select`, click) — Selects the target language for chat message auto-translation (saved to the translation service). 17 supported languages — see the body; note this set differs from the UI locales.
+  - **Auto Translate** (`toggle`, click) — Enables or disables automatic translation of incoming chat messages (master switch on the IM user; default on).
+
+## Supported languages
+
+This page exposes **two separate language settings backed by two different lists** — keep them distinct.
+
+### System (UI) language — 17 locales
+
+The interface locale, from `LOCALES` / `LOCALE_LABELS` in `lib/i18n/index.ts`:
+
+| Code | Label |
+| --- | --- |
+| `en` | English |
+| `fa` | فارسی (Persian) |
+| `fr` | Français (French) |
+| `de` | Deutsch (German) |
+| `es` | Español (Spanish) |
+| `it` | Italiano (Italian) |
+| `ru` | Русский (Russian) |
+| `id` | Bahasa Indonesia |
+| `ms` | Bahasa Melayu (Malay) |
+| `hi` | हिन्दी (Hindi) |
+| `bn` | বাংলা (Bengali) |
+| `th` | ภาษาไทย (Thai) |
+| `ja` | 日本語 (Japanese) |
+| `ko` | 한국어 (Korean) |
+| `zh-HK` | 繁體中文(香港) (Traditional Chinese — Hong Kong) |
+| `zh-TW` | 繁體中文(台灣) (Traditional Chinese — Taiwan) |
+| `zh` | 简体中文 (Simplified Chinese) |
+
+Default locale: `en`.
+
+### Chat auto-translation language — 17 languages
+
+The target language for message auto-translation, from `TRANSLATION_LANGUAGES` in `lib/im/translation.ts`:
+
+| Code | Label |
+| --- | --- |
+| `en` | English |
+| `fa` | فارسی |
+| `fr` | Français |
+| `de` | Deutsch |
+| `es` | Español |
+| `pt` | Português |
+| `it` | Italiano |
+| `ru` | Русский |
+| `id` | Bahasa Indonesia |
+| `vi` | Tiếng Việt |
+| `bn` | বাংলা |
+| `th` | ไทย |
+| `ar` | العربية |
+| `ja` | 日本語 |
+| `ko` | 한국어 |
+| `zh-TW` | 繁體中文 |
+| `zh-CN` | 简体中文 |
+
+### The two sets are NOT identical
+
+- **Only in the UI locale set:** Bahasa Melayu (`ms`), हिन्दी (`hi`), and a Hong Kong Traditional Chinese variant (`zh-HK`).
+- **Only in the chat-translation set:** Português (`pt`), Tiếng Việt (`vi`), العربية (`ar`).
+- **Chinese codes differ:** the UI uses `zh` / `zh-TW` / `zh-HK`; chat translation uses `zh-CN` / `zh-TW`.
 
 #### Page /settings/privacy
 
@@ -1005,63 +1103,6 @@ their entries.
 - Downstream: _none_
 - CTAs: _none_
 
-#### Page /test-native
-
-**Native WebView Test** — Developer test harness that embeds the native-webview iframe and posts messages to it for debugging.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: _none_
-- CTAs:
-  - **Send Message** (`button`, click) — Opens a browser prompt for text and postMessage()s it to the embedded /native-webview iframe.
-
-#### Page /ui
-
-**UI Design Reference** — Internal design reference page showing the primary color palette (copyable) and wallet connection status.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: _none_
-- CTAs: _none_
-
-#### Page /ui/openclaw-test
-
-**OpenClaw Test** — Internal test page to deploy, list, inspect, and destroy OpenClaw instances and connect to them via terminal.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: _none_
-- CTAs:
-  - **Deployment name input** (`input`, input) — Text field for naming the new OpenClaw deployment.
-  - **Template select** (`select`, click) — Dropdown to choose an OpenClaw template for the new deployment.
-  - **Deploy button** (`button`, click) — Creates a new OpenClaw deployment on GCP and polls until it reaches running status.
-  - **Select deployment** (`button`, click) — Clicking a deployment in the list makes it active, showing its details, status, and terminal/settings panel.
-  - **Destroy deployment** (`dialog`, click) — Opens a confirmation dialog; confirming permanently deletes the GCP VM and its data.
-  - **Refresh deployments** (`button`, click) — Refetches the deployment list from the OpenClaw API.
-
-#### Page /ui/video-test
-
-**Video Test** — Internal test page for previewing videos and tracing their redirect chains, HTTP statuses, and video element lifecycle events.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: _none_
-- CTAs:
-  - **Mode tabs** (`tabs`, click) — Switches between test modes: PhotoSlider and Native Video.
-  - **Preview buttons** (`button`, click) — Open the PhotoSlider video preview overlay in normal or gesture-isolated mode.
-  - **Video URL input** (`input`, input) — Textarea for the video URL to test; preset buttons fill in sample URLs and Enter triggers Load.
-  - **Load button** (`button`, click) — Sets the video element src to the entered URL and traces native loading lifecycle events into the log.
-  - **Probe button** (`button`, click) — Runs a server-side fetch that follows the URL's redirect chain and logs each hop's status and headers.
-  - **Clear Log button** (`button`, click) — Clears all entries from the event log panel.
-  - **Download Log button** (`button`, click) — Downloads the event log as a plain-text file.
-
-#### Page /ui/wip
-
-**WIP Playbooks** — Internal work-in-progress workbench for previewing UI playbooks such as usage overview, model routing, VM warnings, uploads, and audio preview.
-
-- Upstream: _none (direct/external entry)_
-- Downstream: _none_
-- CTAs:
-  - **Playbook nav** (`tabs`, click) — Sidebar list that switches the active test playbook: Usage Overview, Model Routing Table, Platform VM Warning, Bunny Storage Upload, Audio Preview.
-  - **Toggle controls** (`toggle`, click) — Shows or hides the active playbook's right-hand controls panel.
-  - **Toggle sidebar** (`toggle`, click) — Collapses or expands the playbook navigation sidebar.
-
 ## Shared layouts & chrome
 
 Layout components (`layout.tsx`) wrap one or more route segments and render
@@ -1124,16 +1165,34 @@ the pages beneath them. Their CTAs are the app-wide navigation controls.
 
 ### Layout /chat — Chat Layout
 
-**Chat Layout** — Two-pane chrome for the messaging workspace — a resizable left sidebar (the aside panel with conversation search and the user's conversation list) beside the active conversation. On mobile the open conversation is presented in a full-screen sheet whose back button clears the selection.
+**Chat Layout** — Two-pane chrome for the messaging workspace — a resizable left sidebar (the aside panel with conversation search, the new/contact menu, and the conversation list with per-item context menus) beside the active conversation. On mobile the open conversation is presented in a full-screen sheet whose back button clears the selection.
 
 - Wraps: `app/(dashboard)/chat`
-- Downstream: _none_
+- Downstream: [`/discover`](#page-discover), [`/add-contact`](#page-add-contact), [`/search/conversation`](#page-searchconversation)
 - CTAs:
-  - **Conversation sidebar** (`nav`, click) — Resizable aside panel listing the user's conversations; width persists under the chat-sidebar-width key.
-    - **Conversation search** (`input`, input) — Search box that filters the conversation list as you type.
-    - **Conversation list item** (`button`, click) — Selects a conversation to open it in the main pane (or the mobile sheet).
+  - **Conversation sidebar** (`nav`, click) — Resizable aside panel: header (search + new menu), the conversation list, and (when searching) the global-search screen.
+    - **Conversation search box** (`input`, input/click) — Filters/searches conversations; focusing it opens the search screen (navigates to /search?q= on mobile). A back arrow exits search.
+    - **New / contact menu** (`menu`, click) — Plus button (desktop sidebar / mobile header) opening a create menu.
+      - **Create new group** (`button`, click) — Opens the create-group modal (or /login when signed out).
+      - **Add contact** (`button`, click) — Opens the add-contact modal on desktop, or navigates to /add-contact on mobile.
+      - **Create agent** (`button`, click) — Opens the create-agent modal.
+    - **Personal AI item** (`button`, click) — Pinned super-agent conversation at the top of the list; opens the user's Personal AI.
+    - **Conversation list item** (`button`, click/rightclick/longpress) — Tap to open the conversation; shows unread / mention / pinned / mute / official indicators. Right-click (desktop) or long-press (mobile) opens its context menu.
+      - **Pin / unpin to top** (`button`, click) — Toggles whether the conversation is pinned to the top of the list.
+      - **Mark as read** (`button`, click) — Clears unread count and @mention markers (shown when unread).
+      - **Delete conversation** (`button`, click) — Deletes the conversation and its messages (opens a confirmation dialog).
+    - **Empty-state Discover Agents** (`button`, click) — Shown when the list is empty; navigates to /discover.
+    - **Jump to first unread (mobile)** (`button`, doubleclick) — Double-tapping the Chat tab scrolls the list to the first unread conversation (or top).
+    - **Search screen** (`nav`, input/click) — Replaces the list while searching; category tabs over result rows that open conversations or jump to messages.
+      - **Category tabs** (`tabs`, click) — All / Contacts / Groups / Agents / Messages / Files / Media — filters the results.
+      - **Contact / group / agent result** (`button`, click) — Opens the conversation with that contact, group, or agent (query highlighted).
+      - **Message / file / media result** (`button`, click) — Jumps to that message (or file/media) in its conversation.
+      - **Default suggestions** (`button`, click) — When the query is empty: recent contacts/groups/messages/files/media rows that open or jump to them.
+      - **View all matches** (`button`, click) — Opens the category-search dialog (desktop) or /search/conversation (mobile) for the full result list.
+      - **Category-search dialog** (`dialog`, click) — Full, infinite-scrolling results for one category; rows open a conversation or its matches dialog, or jump to a message; close to return.
+      - **Conversation-matches dialog** (`dialog`, click) — All message/file/media hits within one conversation; tap a row to jump to that message; close to return.
   - **Mobile conversation sheet** (`dialog`, click) — Full-screen right-side sheet that shows the open conversation on mobile; the system/back gesture closes it and clears the current conversation.
-  - **Sidebar resize handle** (`button`, hover/click) — Drag handle on the resizable sidebar edge; persists the chosen width. (Desktop only.)
+  - **Sidebar resize handle** (`button`, hover/drag) — Drag handle on the resizable sidebar edge; persists the chosen width (300–500px) under the chat-sidebar-width key. (Desktop only.)
 
 ### Layout /contact — Contact Layout
 
